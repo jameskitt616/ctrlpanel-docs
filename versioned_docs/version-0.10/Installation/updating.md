@@ -5,14 +5,38 @@ sidebar_position: 5
 # Updating
 
 :::caution
-This guide is for updates 0.9.0 -> 0.9.X
-If you update from 0.8.X or older, please follow our 0.9 update guide. (Version dropdown top right)
+This guide is for updates 0.9.x -> 0.10.0 (Check the Version dropdown at the top right)
 :::
+
+## Docker
+
+### Get into the correct directory
+
+likely one of these two
+```
+cd ~/ctrlpanel
+cd ~/controlpanel
+```
+
+### Pull the new Docker images, start and cleanup
+
+```bash
+docker compose pull && docker compose up -d && docker image prune -f
+```
+
+## Bare Metal
+
+### Use the correct directory
+
+likely one of these two
+```
+cd /var/www/ctrlpanel
+cd /var/www/controlpanel
+```
 
 ### Enable Maintenance Mode
 
 ```bash
-cd /var/www/controlpanel
 sudo php artisan down
 ```
 
@@ -21,6 +45,9 @@ sudo php artisan down
 ```bash
 sudo git stash
 sudo git pull
+# Check Correct directory
+sudo chmod -R 755 /var/www/ctrlpanel
+# or
 sudo chmod -R 755 /var/www/controlpanel
 ```
 
@@ -47,12 +74,21 @@ sudo php artisan config:clear
 
 ```bash
 # If using NGINX or Apache (not on CentOS):
+# Check Correct directory
+sudo chown -R www-data:www-data /var/www/ctrlpanel/
+# or
 sudo chown -R www-data:www-data /var/www/controlpanel/
 
 # If using NGINX on CentOS:
+# Check Correct directory
+sudo chown -R nginx:nginx /var/www/ctrlpanel/
+# or
 sudo chown -R nginx:nginx /var/www/controlpanel/
 
 # If using Apache on CentOS
+# Check Correct directory
+sudo chown -R apache:apache /var/www/ctrlpanel/
+# or
 sudo chown -R apache:apache /var/www/controlpanel/
 ```
 
